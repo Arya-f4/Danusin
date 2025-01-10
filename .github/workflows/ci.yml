@@ -20,13 +20,13 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin' # Use Temurin distribution
-          java-version: '17' # Update to the latest stable version
+          distribution: 'temurin'
+          java-version: '17'
 
-      - name: Install Flutter SDK
-        uses: actions/setup-flutter@v2
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.10.5' # Specify the exact version to avoid ambiguity
+          flutter-version: '3.6.0' # Match the SDK version from your pubspec.yaml
 
       - name: Install Dependencies
         run: flutter pub get
@@ -37,7 +37,4 @@ jobs:
       - name: Build Android APK
         run: flutter build apk --release
 
-      - name: Build iOS App
-        env:
-          CI: true
-        run: flutter build ios --release
+      - name: Build iOS
