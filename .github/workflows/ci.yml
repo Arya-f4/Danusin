@@ -23,10 +23,13 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - name: Flutter Action
+        uses: subosito/flutter-action@v2.14.0
         with:
-          flutter-version: '3.6.0' # Match the SDK version from your pubspec.yaml
+          flutter-version: '3.6.0' # Match the version from your pubspec.yaml
+          channel: stable          # Use the stable release channel
+          cache: true              # Enable caching for faster subsequent builds
+          architecture: x64        # Use x64 architecture (adjust if needed)
 
       - name: Install Dependencies
         run: flutter pub get
@@ -37,4 +40,8 @@ jobs:
       - name: Build Android APK
         run: flutter build apk --release
 
-      - name: Build iOS
+      - name: Build iOS App
+        if: runner.os == 'macOS'
+        env:
+          CI: true
+        run: flutter build ios --release
