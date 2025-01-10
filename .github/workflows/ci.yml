@@ -23,10 +23,10 @@ jobs:
           distribution: 'temurin' # Use Temurin distribution
           java-version: '17' # Update to the latest stable version
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - name: Install Flutter SDK
+        uses: actions/setup-flutter@v2
         with:
-          flutter-version: 'stable'
+          flutter-version: '3.10.5' # Specify the exact version to avoid ambiguity
 
       - name: Install Dependencies
         run: flutter pub get
@@ -40,21 +40,4 @@ jobs:
       - name: Build iOS App
         env:
           CI: true
-        run: |
-          flutter build ios --release
-
-  deploy:
-    name: Deploy to Stores
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      # Add steps here for deployment to the Google Play Store and/or Apple App Store
-      # For example:
-      # - name: Deploy to Google Play
-      #   uses: r0adkll/upload-google-play@v1
-
-      # - name: Deploy to TestFlight
-      #   uses: appleboy/fastlane-action@v1
+        run: flutter build ios --release
