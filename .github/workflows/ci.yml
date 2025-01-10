@@ -26,10 +26,10 @@ jobs:
       - name: Flutter Action
         uses: subosito/flutter-action@v2.14.0
         with:
-          flutter-version: '3.6.0' # Match the version from your pubspec.yaml
-          channel: stable          # Use the stable release channel
-          cache: true              # Enable caching for faster subsequent builds
-          architecture: x64        # Use x64 architecture (adjust if needed)
+          flutter-version: '3.27.1' # Replace with a valid version from stable channel
+          channel: stable
+          cache: true
+          architecture: x64
 
       - name: Install Dependencies
         run: flutter pub get
