@@ -1,0 +1,60 @@
+name: Flutter CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and Test Flutter App
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # Use Temurin distribution
+          java-version: '17' # Update to the latest stable version
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Run Tests
+        run: flutter test
+
+      - name: Build Android APK
+        run: flutter build apk --release
+
+      - name: Build iOS App
+        env:
+          CI: true
+        run: |
+          flutter build ios --release
+
+  deploy:
+    name: Deploy to Stores
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Add steps here for deployment to the Google Play Store and/or Apple App Store
+      # For example:
+      # - name: Deploy to Google Play
+      #   uses: r0adkll/upload-google-play@v1
+
+      # - name: Deploy to TestFlight
+      #   uses: appleboy/fastlane-action@v1
