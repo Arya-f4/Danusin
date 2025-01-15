@@ -40,11 +40,11 @@ jobs:
       - name: Build Android APK
         run: flutter build apk --release
 
-      - name: Upload Android Artifact
+      - name: Upload Android Artifact, No IOS App for this runner 💀 
         uses: actions/upload-artifact@v3
         with:
           name: android-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
-      - name: No IOS App for this runner 💀 
+ 
        
