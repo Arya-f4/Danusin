@@ -46,13 +46,5 @@ jobs:
           name: android-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
-      - name: Build iOS App
-        env:
-          CI: true
-        run: flutter build ios --release
-
-      - name: Upload iOS Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: ios-release-app
-          path: build/ios/ipa/*.ipa
+      - name: No IOS App for this runner 💀 
+       
